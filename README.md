@@ -1,6 +1,6 @@
 # LuMI-synthesizer
 
-Génération de sons par synthèse additive (d'harmoniques) – on peut s'inspirer des projets existant suivants pour l'interfacage avec la carte son :
+Pour la génération de sons par synthèse additive (d'harmoniques), on peut s'inspirer des projets existant suivants pour l'interfacage avec la carte son :
 https://github.com/Penguinum/python-synth ; https://github.com/belangeo/zyne ; https://mdoege.github.io/PySynth ; https://wiki.python.org/moin/PythonInMusic
 
 
