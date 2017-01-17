@@ -14,6 +14,6 @@ Le générateur de son correspond au fichier generateur_de_son.py (il reste un b
 
 Améliorations rêvables : 
 afficher le spectrogramme joué en direct ; 
-moduler le son (pour lui donner de la distorsion, ou de la résonance… http://www.pianoweb.fr/filtres-analogiques.php) en direct avec la molette de la souris ; 
+moduler le son (pour lui donner de la distorsion, ou de la résonance…) en direct avec la molette de la souris ; 
 créer des timbres à partir d'enregistrement audio d'instruments réels ; 
 …
