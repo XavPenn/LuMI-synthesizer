@@ -25,7 +25,7 @@ class Son:
         self.debut = debut*taux
         self.duree = duree*taux
         self.timbre = R[timbre].get
-        self.spectre = np.concatenate((self.timbre[1000-np.floor(R[hauteur]):],np.zeros(self.duree-9000+np.floor(R[hauteur])))) 
+        self.spectre = np.concatenate((self.timbre[1000-np.floor(R[hauteur]):],np.zeros(self.duree-9000-np.floor(R[hauteur])))) 
         # Permet d'avoir un spectre comportant le timbre transposé, et qui soit de la longueur du signal final.
         self.enveloppe = Enveloppe(enveloppe,duree).get
         self.get = np.fft.ifft(self.spectre)*self.enveloppe
@@ -75,14 +75,17 @@ def jouer(partition):
     signal = np.array([])
     for son in partition:
         if len(signal)<son.debut+son.duree:
-            signal = np.concatenate((signal,np.zeros(son.debut+son.duree-son.duree)))
+            signal = np.concatenate((signal,np.zeros(son.debut+son.duree-len(signal))))
         signal[son.debut:son.debut+len(son.get)] += son.get
+    signal *= 0.2/np.max(signal)
 # La syntaxe qui suit est tirée de davywybiral.blogspot.fr/2010/09/procedural-music-with-pyaudio-and-numpy.html
     p = pyaudio.PyAudio()
-    stream = p.open(format=pyaudio.paFloat32, channels=1, rate=taux, output=1)
+    stream = p.open(format=pyaudio.paFloat32, channels=1, rate=44100, output=1)
     stream.write(signal.astype(np.float32).tostring())
     stream.close()
     p.terminate()
+    return signal
+
         
 def filtre(coupure, largeur, taille):
     return np.concatenate((np.zeros(coupure-largeur),np.linspace(0,1,largeur),np.ones(taille-coupure)))
@@ -97,5 +100,5 @@ for i,clef in enumerate(('a','z','e','r','t','y','u','i','o','p')):
 
 
 
-partition = (Son(0,'a', '1', 'sin'),Son(1,'a','2','lin',5),Son(3,'r','1','sin'))
+partition = (Son(0,'a', '1', 'sin'),Son(1,'a','2','lin',4),Son(3,'r','1','sin'))
 jouer(partition)
